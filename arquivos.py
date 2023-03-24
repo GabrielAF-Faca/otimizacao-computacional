@@ -11,57 +11,40 @@ coeficientes = []
 
 # funcao para printar um sistema passado pelo parâmetro matriz, junto ao seu resultado
 def print_sistema(matriz=list):
-    
-    # inicializa uma string sistema vazia, onde toda a string do sistema será montada
-    sistema = ""
-    
-    # itera por todos os índices da matriz, onde i é o índice (0, 1, 2, ...)
 
-    for i in range(len(matriz)):
+    sistema = "" # inicializa uma string sistema vazia, onde toda a string do sistema será montada
+
+    for i in range(len(matriz)): # itera por todos os índices da matriz, onde i é o índice (0, 1, 2, ...)
         
         resultado = matriz[i][-1]
-        
-        # inicializa uma string linha vazia, onde a string de cada linha do sistema será montada
-        linha = ""
-        
-        # itera por todos os índices de cada índice da matriz, onde j é o índice (0, 1, 2, ...)
-        for j in range(len(matriz[i])-1):
-            
-            # pega o coeficiente atual
-            coef = matriz[i][j]
-            
-            # se esse coeficiente não for 0
-            if coef != 0:
-                
-                # se esse coeficiente é maior do que 0 e o tamanho da linha também (não é o primeiro índice)
-                if coef > 0 and len(linha) > 0:
-                    
-                    # adiciona "+ " à string linha
-                    linha += "+ "
-                
-                # se esse coeficiente é menor do que 0
-                elif coef < 0:
-                    
-                    # adiciona "- " à string linha
-                    linha += "- "
-                
-                # se o módulo do coeficiente for diferente de 1 
-                if abs(coef) != 1:
-                    
-                    # adiciona a string do módulo do coeficiente na linha
-                    linha += str(abs(coef)) + " "
-                
-                # adiciona o "nome" da variável na linha
-                linha += variaveis_posicoes[j] + " "
-                
-        # ao fim do loop, adiciona o valor do resultado da linha atual do sistema
-        linha += "= " + str(resultado)
 
-        # adiciona uma quebra de linha à string sistema
-        sistema += linha + "\n"
-    
-    # printa a string sistema
-    print(sistema)    
+        linha = "" # inicializa uma string linha vazia, onde a string de cada linha do sistema será montada
+
+        for j in range(len(matriz[i])-1): # itera por todos os índices de cada índice da matriz, onde j é o índice (0, 1, 2, ...)
+
+            coef = matriz[i][j] # pega o coeficiente atual
+
+            if coef != 0: # se esse coeficiente não for 0
+
+                if coef > 0 and len(linha) > 0: # se esse coeficiente é maior do que 0 e o tamanho da linha também (não é o primeiro índice)
+
+                    linha += "+ " # adiciona "+ " à string linha
+
+                elif coef < 0: # se esse coeficiente é menor do que 0
+
+                    linha += "- " # adiciona "- " à string linha
+
+                if abs(coef) != 1: # se o módulo do coeficiente for diferente de 1
+
+                    linha += str(abs(coef)) + " " # adiciona a string do módulo do coeficiente na linha
+
+                linha += variaveis_posicoes[j] + " " # adiciona o "nome" da variável na linha
+
+        linha += "= " + str(resultado) # ao fim do loop, adiciona o valor do resultado da linha atual do sistema
+
+        sistema += linha + "\n" # adiciona uma quebra de linha à string sistema
+
+    print(sistema) # printa a string sistema
 
                   
 # função para extrair de uma string (passada pelo parâmetro expressao) os coeficientes de um sistema
@@ -292,12 +275,9 @@ def abrir_arquivo(caminho):
     # printa as posições das variáveis
     print(variaveis_posicoes)
     print()
-    
-    # para cada lista de coeficientes na lista coeficientes
-    for coef in coeficientes:
-        
-        # printa a lista de coeficientes
-        print(coef)
+
+    # printa a lista de coeficientes
+    Matematica.printar_sistema(coeficientes)
         
     print()
 
@@ -309,10 +289,12 @@ abrir_arquivo("./equacoes.txt")
 # chama a função print_sistema
 print_sistema(coeficientes)
 
-m = Matematica()
-
 print("Sistema escalonado:\n")
-escalonado = m.escalonar(coeficientes)
 
-for i in escalonado:
-    print(i)
+escalonado = Matematica.escalonar(coeficientes)
+
+Matematica.printar_sistema(escalonado)
+
+print()
+
+print_sistema(escalonado)
